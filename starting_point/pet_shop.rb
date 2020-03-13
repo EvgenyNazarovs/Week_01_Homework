@@ -24,11 +24,14 @@ end
 
 def pets_by_breed(pet_shop, breed)
   pets_by_breed = []
-  pets_array = pet_shop[:pets]
-  pets_array.each do |pet|
+  for pet in pet_shop[:pets]
     if breed.downcase == pet[:breed].downcase
       pets_by_breed << pet
     end
   end
   return pets_by_breed
 end
+
+def find_pet_by_name(pet_shop, name)
+
+end 
