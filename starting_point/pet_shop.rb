@@ -37,5 +37,6 @@ def find_pet_by_name(pet_shop, name)
     if name == pet[:name]
       return pet
     end
-  end 
+  end
+  return nil 
 end
