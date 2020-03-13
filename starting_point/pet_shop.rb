@@ -21,3 +21,14 @@ end
 def stock_count(pet_shop)
   return pet_shop[:pets].length
 end
+
+def pets_by_breed(pet_shop, breed)
+  pets_by_breed = []
+  pets_array = pet_shop[:pets]
+  pets_array.each do |pet|
+    if breed.downcase == pet[:breed].downcase
+      pets_by_breed << pet
+    end
+  end
+  return pets_by_breed
+end
