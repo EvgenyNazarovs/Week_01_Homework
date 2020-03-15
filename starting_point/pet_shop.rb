@@ -32,14 +32,16 @@ def pets_by_breed(pet_shop, breed)
   return pets_by_breed
 end
 
-def find_pet_by_name(pet_shop, name)
+def find_pet_by_name(pet_shop, pet_name)
+
   for pet in pet_shop[:pets]
-    if name == pet[:name]
+    if pet_name == pet[:name]
       return pet
     end
   end
   return nil
 end
+
 
 def remove_pet_by_name(pet_shop, pet_name)
   for pet in pet_shop[:pets]
@@ -73,16 +75,30 @@ def customer_can_afford_pet(customer, new_pet)
   if customer[:cash] >= new_pet[:price]
     return true
   else return false
-end
-end
-
-def sell_pet_to_customer(pet_shop, pet, customer)
-  if pet_shop[:pets].include?(pet)
-    if customer[:cash] >= pet[:price]
-      customer[:cash] -= pet[:price]
-      pet_shop[:admin][:total_cash] += pet[:price]
-      customer[:pets] << pet
-      pet_shop[:admin][:pets_sold] += 1
-    end
   end
 end
+
+# reusing code
+
+def sell_pet_to_customer(pet_shop, pet, customer)
+  if pet && customer_can_afford_pet(customer, pet)
+    add_pet_to_customer(customer, pet)
+    increase_pets_sold(pet_shop, 1)
+    remove_customer_cash(customer, pet[:price])
+    add_or_remove_cash(pet_shop, pet[:price])
+end
+
+end
+
+# new code
+
+# def sell_pet_to_customer(pet_shop, pet, customer)
+# if pet
+#   if customer[:cash] >= pet[:price]
+#       customer[:cash] -= pet[:price]
+#       pet_shop[:admin][:total_cash] += pet[:price]
+#       customer[:pets] << pet
+#       pet_shop[:admin][:pets_sold] += 1
+#     end
+#   end
+# end
